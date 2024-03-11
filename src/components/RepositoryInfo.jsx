@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   language: {
-    color: 'white',
     borderRadius: 5,
     padding: 3
   }
@@ -39,7 +38,7 @@ const RepositoryInfo = ({ item }) => {
       <View style={styles.flexContainerCol}>
         <Text fontSize='subheading' fontWeight='bold'> {item.fullName}</Text>
         <Text fontSize='subheading' color='textSecondary'> {item.description}</Text>
-        <Text backgroundColor='primary' style={styles.language} > {item.language}</Text>
+        <Text color='textThird' backgroundColor='primary' style={styles.language} > {item.language}</Text>
       </View>
     </View>
   );

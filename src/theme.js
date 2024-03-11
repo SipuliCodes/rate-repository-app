@@ -2,8 +2,11 @@ const theme = {
   colors: {
     textPrimary: '#24292e',
     textSecondary: '#586069',
+    textThird: 'white',
     primary: '#0366d6',
-    bgPrimary: '#24292e'
+    mainBackground: '#e1e4e8',
+    secondaryBackground: '#24292e',
+    thirdBackground: 'white'
   },
   fontSizes: {
     body: 14,
