@@ -6,10 +6,13 @@ const useRepositories = () => {
     fetchPolicy: 'cache-and-network',
   });
 
+  if (loading) {
+    return { repositories: [], loading };
+  }
   if (error) {
     throw new Error('Something went wrong while querying data');
   }
-  
+
   const repositories = data.repositories;
 
   return { repositories, loading}
