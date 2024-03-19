@@ -10,7 +10,7 @@ const useRepositories = () => {
     return { repositories: [], loading };
   }
   if (error) {
-    throw new Error('Something went wrong while querying data');
+    throw new Error('Something went wrong while querying data' + error);
   }
 
   const repositories = data.repositories;
