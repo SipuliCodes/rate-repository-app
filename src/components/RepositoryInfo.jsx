@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     gap: 5,
     alignItems: 'flex-start',
     margin: 10,
+    width: '80%'
   },
   avatar: {
     width: 50,

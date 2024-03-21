@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { data } = useQuery(ME);
+  const { data, loading } = useQuery(ME);
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
@@ -31,6 +31,10 @@ const AppBar = () => {
     authStorage.removeAccessToken();
     apolloClient.resetStore();
     
+  }
+
+  if (loading) {
+    return 
   }
 
   return (
