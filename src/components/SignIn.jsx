@@ -61,7 +61,7 @@ export const SingInContainer = ({onSubmit}) => {
         onChangeText={formik.handleChange('username')}
       />
       {formik.touched.username && formik.errors.username && (
-        <Text style={{ color: theme.colors.error }}>{formik.errors.username}</Text>
+        <Text color='error'>{formik.errors.username}</Text>
       )}
       <TextInput
         style={[styles.input, formik.errors.password && styles.error ]}
@@ -71,7 +71,7 @@ export const SingInContainer = ({onSubmit}) => {
         onChangeText={formik.handleChange('password')}
       />
       {formik.touched.password && formik.errors.password && (
-        <Text style={{ color: theme.colors.error }}>{formik.errors.password}</Text>
+        <Text color='error'>{formik.errors.password}</Text>
       )}
       <Pressable onPress={formik.handleSubmit}>
         <Text style={styles.button} color='textThird' backgroundColor='primary'>Sign in</Text>
@@ -88,8 +88,7 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      const data = await signIn({ username, password });
-      console.log(data);
+      await signIn({ username, password });
       navigate("/")
     } catch (e) {
       console.log(e);

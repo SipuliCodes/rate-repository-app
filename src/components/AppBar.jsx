@@ -42,7 +42,7 @@ const AppBar = () => {
         <AppBarTab title='Repositories' link='/' />
         {data.me && <AppBarTab title='Create Review' link='/create-review' />}
         {!data.me ? <AppBarTab title='Sign in' link='/sign-in' /> : <Pressable onPress={signOut}><Text fontSize='subheading' color='textThird' style={styles.text}>Sign Out</Text></Pressable> }
-        
+        {!data.me && <AppBarTab title='Sign up' link='/sign-up' />}
       </ScrollView>
     </View>
   )
