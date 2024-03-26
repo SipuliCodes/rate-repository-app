@@ -3,7 +3,7 @@ import { GET_CURRENT_USER } from "../graphql/queries";
 
 
 const useCurrentUser = ({includeReviews}) => {
-  const { data, error, loading } = useQuery(GET_CURRENT_USER, {
+  const { data, error, loading, refetch } = useQuery(GET_CURRENT_USER, {
     fetchPolicy: 'cache-and-network',
     variables: {
       includeReviews: includeReviews
@@ -18,7 +18,7 @@ const useCurrentUser = ({includeReviews}) => {
     throw new Error('Something went wrong while querying reviews' + error);
   }
 
-  return { data, loading };
+  return { data, loading, refetch };
 };
 
 export default useCurrentUser;
