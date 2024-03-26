@@ -3,7 +3,7 @@ import { GET_REPOSITORIES } from "../graphql/queries";
 
 const useRepositories = ({ selectedOrder, searchKey }) => {
   const variables = {
-    orderBy: selectedOrder === 'latest' ? 'CREATED_AT' : 'RATING_AVERAGE',
+    orderBy: selectedOrder === 'highest' || selectedOrder === 'lowest' ? 'RATING_AVERAGE' : 'CREATED_AT',
     orderDirection: selectedOrder === 'lowest' ? 'ASC' : 'DESC',
     searchKeyword: searchKey
   };

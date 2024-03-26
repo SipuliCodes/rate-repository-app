@@ -60,11 +60,24 @@ export const GET_REVIEWS = gql`
 }
 `
 
-export const ME = gql`
-  query {
+export const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            id
+            rating
+            createdAt
+            text
+            user {
+              username
+            }
+          }
+        }
+      }
     }
-}
+  }
 `
