@@ -1,19 +1,34 @@
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORIES } from "../graphql/queries";
 
-const useRepositories = ({ selectedOrder, searchKey }) => {
+const useRepositories = ({ first, selectedOrder, searchKey }) => {
+  
   const variables = {
+    first,
     orderBy: selectedOrder === 'highest' || selectedOrder === 'lowest' ? 'RATING_AVERAGE' : 'CREATED_AT',
     orderDirection: selectedOrder === 'lowest' ? 'ASC' : 'DESC',
     searchKeyword: searchKey
   };
 
-  console.log(variables);
-
-  const { data, error, loading } = useQuery(GET_REPOSITORIES, {
+  const { data, error, loading, fetchMore, ...result } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
-    variables: variables
+    variables
   });
+
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variables,
+      },
+    });
+  };
 
   if (loading) {
     return {repositories: [], loading}
@@ -23,9 +38,12 @@ const useRepositories = ({ selectedOrder, searchKey }) => {
     throw new Error('Something went wrong while querying data' + error);
   }
 
-  const repositories = data.repositories;
-
-  return {repositories, loading}
+  return {
+    repositories: data?.repositories,
+    fetchMore: handleFetchMore,
+    loading,
+    ...result
+  };
 };
 
 

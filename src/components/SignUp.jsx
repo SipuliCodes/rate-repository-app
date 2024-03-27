@@ -102,7 +102,7 @@ const SignUp = () => {
         style={[styles.input, formik.errors.passwordConfirmation && styles.error]}
         placeholder="Password confirmation"
         value={formik.values.passwordConfirmation}
-        secureTextEntrys
+        secureTextEntry
         onChangeText={formik.handleChange('passwordConfirmation')}
       />
       {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && <Text color='error' style={styles.errorText}>{formik.errors.passwordConfirmation}</Text>}

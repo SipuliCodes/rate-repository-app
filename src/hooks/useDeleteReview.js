@@ -7,7 +7,6 @@ const useDeleteReview = () => {
 
   const deleteReview = async ({ id }) => {
     try {
-      console.log(id)
       await mutate({ variables: { deleteReviewId: id } })
     }
     catch (e) {

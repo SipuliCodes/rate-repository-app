@@ -1,48 +1,39 @@
 import { gql } from '@apollo/client';
+import { REPOSITORY_DETAILS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
-  query getRepositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String){
-    repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
+  query getRepositories($first: Int, $after: String, $orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String){
+    repositories(first: $first, after: $after, orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
       edges {
         node {
-          id
-          description
-          forksCount
-          language
-          ownerAvatarUrl
-          ratingAverage
-          reviewCount
-          stargazersCount
-          fullName
+          ...RepositoryDetails
         }
+        cursor
       }
+      pageInfo {
+          hasNextPage,
+          endCursor
+        }
     }
   }
+  ${REPOSITORY_DETAILS}
 `
 
 export const GET_REPOSITORY = gql`
   query getRepository($id: ID!){
     repository(id: $id) {
-      id
-      fullName
-      url
-      description
-      forksCount
-      ratingAverage
-      reviewCount
-      stargazersCount
-      language
-      ownerAvatarUrl
+      ...RepositoryDetails
     }
   }
+  ${REPOSITORY_DETAILS}
 `
 
 export const GET_REVIEWS = gql`
-  query getReviews($id: ID!){
+  query getReviews($id: ID!, $first: Int, $after: String){
   repository(id: $id) {
     id
     fullName
-    reviews {
+    reviews(first: $first, after: $after) {
       edges {
         node {
           id
@@ -54,6 +45,12 @@ export const GET_REVIEWS = gql`
             username
           }
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }
