@@ -11,6 +11,7 @@ export const RepositoryTypeDefs = gql`
     reviewCount: Int
     stargazersCount: Int
     fullName: String
+    url: String
   }`
 
 export const REPOSITORY_DETAILS = gql`
@@ -24,5 +25,6 @@ export const REPOSITORY_DETAILS = gql`
     reviewCount
     stargazersCount
     fullName
+    url
   }
 `
