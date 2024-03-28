@@ -6,6 +6,7 @@ import { useApolloClient} from "@apollo/client";
 import Text from "./Text";
 import useAuthStorage from "../hooks/useAuthStorage";
 import useCurrentUser from "../hooks/useCurrentUser";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,11 +23,13 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const navigate = useNavigate()
   const { data, loading } = useCurrentUser({includeReviews: false})
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
   const signOut = () => {
+    navigate('/')
     authStorage.removeAccessToken();
     apolloClient.resetStore();
     
